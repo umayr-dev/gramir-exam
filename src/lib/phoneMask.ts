@@ -9,7 +9,7 @@ function getDigits(value: string) {
 function formatPhoneUz(value: string) {
   let digits = getDigits(value);
   if (digits.startsWith('998')) {
-    digits = digits;
+  // digits = digits;
   } else if (digits.startsWith('9')) {
     digits = '998' + digits;
   } else if (digits.startsWith('8')) {
