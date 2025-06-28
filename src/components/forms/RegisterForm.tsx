@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/store/auth';
 import { useRegister } from '@/hooks/useRegister';
+import type { AuthResponse, ApiError } from '@/lib/api';
 
 const registerSchema = z.object({
   firstName: z.string().min(1, 'Ism kiritish majburiy'),
@@ -25,14 +26,14 @@ const RegisterForm = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const registerMutation = useRegister({
-    onSuccess: (data) => {
+  const registerMutation = useRegister<AuthResponse, ApiError, RegisterForm>({
+    onSuccess: (data: AuthResponse) => {
       setUser(data.user);
       setToken(data.token);
       toast.success("Muvaffaqiyatli ro'yxatdan o'tdingiz!");
       navigate('/dashboard');
     },
-    onError: (error) => {
+    onError: (error: ApiError) => {
       toast.error(error?.message || "Ro'yxatdan o'tishda xatolik yuz berdi");
     },
   });
