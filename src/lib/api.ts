@@ -7,14 +7,14 @@ export interface ApiError {
 
 export interface LoginRequest {
   phone: string;
-  password: string;
+  passwrod: string;
 }
 
 export interface RegisterRequest {
   firstName: string;
   lastName: string;
   phone: string;
-  password: string;
+  passwrod: string;
 }
 
 export interface AuthResponse {
