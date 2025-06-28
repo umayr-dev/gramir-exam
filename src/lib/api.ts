@@ -1,5 +1,10 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
+export interface ApiError {
+  message: string;
+  status?: number;
+}
+
 export interface LoginRequest {
   phone: string;
   password: string;
@@ -41,7 +46,7 @@ export const login = async (data: LoginRequest): Promise<AuthResponse> => {
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
-    throw new Error(error.message || 'Login failed');
+    throw { message: error.message || 'Login failed', status: response.status } as ApiError;
   }
 
   return response.json();
@@ -55,7 +60,7 @@ export const register = async (data: RegisterRequest): Promise<AuthResponse> => 
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
-    throw new Error(error.message || 'Registration failed');
+    throw { message: error.message || 'Registration failed', status: response.status } as ApiError;
   }
 
   return response.json();

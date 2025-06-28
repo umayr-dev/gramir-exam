@@ -19,7 +19,7 @@ const registerSchema = z.object({
   firstName: z.string().min(1, 'Ism kiritish majburiy'),
   lastName: z.string().min(1, 'Familiya kiritish majburiy'),
   phone: z.string().min(1, 'Telefon raqam kiritish majburiy'),
-  passwrod: z.string().min(6, 'Parol kamida 6 ta belgidan iborat bo\'lishi kerak'),
+  password: z.string().min(6, 'Parol kamida 6 ta belgidan iborat bo\'lishi kerak'),
   // confirmPassword: z.string().min(1, 'Parolni tasdiqlash majburiy'),
 });
 
@@ -55,7 +55,12 @@ const Register = () => {
   });
 
   const onSubmit = (data: RegisterForm) => {
-    registerMutation.mutate(data);
+    registerMutation.mutate({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone,
+      password: data.password,
+    });
   };
 
   return (
@@ -133,16 +138,16 @@ const Register = () => {
               )}
             </div>
             <div>
-              <label htmlFor="passwrod" className="block text-gray-700 font-medium mb-1">
+              <label htmlFor="password" className="block text-gray-700 font-medium mb-1">
                 Parol <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <Input
-                  id="passwrod"
+                  id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Parolni kiriting"
-                  {...register('passwrod')}
-                  className={`h-12 pr-10 ${errors.passwrod ? 'border-red-500' : 'border-gray-300'}`}
+                  {...register('password')}
+                  className={`h-12 pr-10 ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
                 />
                 <button
                   type="button"
@@ -157,8 +162,8 @@ const Register = () => {
                   )}
                 </button>
               </div>
-              {errors.passwrod && (
-                <p className="text-sm text-red-500 mt-1">{errors.passwrod.message}</p>
+              {errors.password && (
+                <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
               )}
             </div>
             <Button

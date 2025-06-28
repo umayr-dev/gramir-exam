@@ -51,7 +51,7 @@ export function usePhoneMask(initialValue = '') {
     value,
     onChange,
     maxLength: 17, // +998 XX XXX XX XX (17 ta belgi)
-    inputMode: 'tel',
+    inputMode: 'numeric' as const,
     pattern: '\\+998 \\d{2} \\d{3} \\d{2} \\d{2}',
     placeholder: '+998 XX XXX XX XX',
   };

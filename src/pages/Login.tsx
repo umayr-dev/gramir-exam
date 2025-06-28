@@ -17,7 +17,7 @@ import AnimatedCards from '../components/AnimatedCards';
 
 const loginSchema = z.object({
   phone: z.string().min(1, 'Telefon raqam kiritish majburiy'),
-  passwrod: z.string().min(1, 'Parol kiritish majburiy'),
+  password: z.string().min(1, 'Parol kiritish majburiy'),
 });
 
 type LoginForm = z.infer<typeof loginSchema>;
@@ -52,7 +52,10 @@ const Login = () => {
   });
 
   const onSubmit = (data: LoginForm) => {
-    loginMutation.mutate(data);
+    loginMutation.mutate({
+      phone: data.phone,
+      password: data.password,
+    });
   };
 
   return (
@@ -102,16 +105,16 @@ const Login = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="passwrod" className="block text-gray-700 font-medium mb-1">
+                <label htmlFor="password" className="block text-gray-700 font-medium mb-1">
                   Parol <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <Input
-                    id="passwrod"
+                    id="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Parolni kiriting"
-                    {...register('passwrod')}
-                    className={`h-12 pr-10 ${errors.passwrod ? 'border-red-500' : 'border-gray-300'}`}
+                    {...register('password')}
+                    className={`h-12 pr-10 ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
                   />
                   <button
                     type="button"
@@ -126,8 +129,8 @@ const Login = () => {
                     )}
                   </button>
                 </div>
-                {errors.passwrod && (
-                  <p className="text-sm text-red-500 mt-1">{errors.passwrod.message}</p>
+                {errors.password && (
+                  <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
                 )}
               </div>
               <Button
