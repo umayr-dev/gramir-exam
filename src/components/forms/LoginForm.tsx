@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/store/auth';
 import { useLogin } from '@/hooks/useLogin';
+import type { AuthResponse, ApiError } from '@/lib/api';
 
 const loginSchema = z.object({
   phone: z.string().min(1, 'Telefon raqam kiritish majburiy'),
@@ -23,14 +24,14 @@ const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const loginMutation = useLogin({
-    onSuccess: (data) => {
+  const loginMutation = useLogin<AuthResponse, ApiError, LoginForm>({
+    onSuccess: (data: AuthResponse) => {
       setUser(data.user);
       setToken(data.token);
       toast.success('Muvaffaqiyatli tizimga kirdingiz!');
       navigate('/dashboard');
     },
-    onError: (error) => {
+    onError: (error: ApiError) => {
       toast.error(error?.message || 'Telefon raqam yoki parol noto\'g\'ri');
     },
   });
