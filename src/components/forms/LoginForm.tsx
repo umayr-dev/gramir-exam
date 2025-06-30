@@ -11,7 +11,7 @@ import type { AuthResponse, ApiError } from '@/lib/api';
 
 const loginSchema = z.object({
   phone: z.string().min(1, 'Telefon raqam kiritish majburiy'),
-  password: z.string().min(1, 'Parol kiritish majburiy'),
+  passwrod: z.string().min(1, 'Parol kiritish majburiy'),
 });
 
 type LoginForm = z.infer<typeof loginSchema>;
@@ -57,17 +57,17 @@ const LoginForm = () => {
         )}
       </div>
       <div>
-        <label htmlFor="password" className="block text-gray-700 font-medium mb-1">
+        <label htmlFor="passwrod" className="block text-gray-700 font-medium mb-1">
           Parol <span className="text-red-500">*</span>
         </label>
         <Input
-          id="password"
+          id="passwrod"
           type="password"
-          {...register('password')}
-          className={`h-12 ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+          {...register('passwrod')}
+          className={`h-12 ${errors.passwrod ? 'border-red-500' : 'border-gray-300'}`}
         />
-        {errors.password && (
-          <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
+        {errors.passwrod && (
+          <p className="text-sm text-red-500 mt-1">{errors.passwrod.message}</p>
         )}
       </div>
       <Button

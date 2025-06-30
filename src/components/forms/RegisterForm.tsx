@@ -13,7 +13,7 @@ const registerSchema = z.object({
   firstName: z.string().min(1, 'Ism kiritish majburiy'),
   lastName: z.string().min(1, 'Familiya kiritish majburiy'),
   phone: z.string().min(1, 'Telefon raqam kiritish majburiy'),
-  password: z.string().min(6, 'Parol kamida 6 ta belgidan iborat bo\'lishi kerak'),
+  passwrod: z.string().min(6, 'Parol kamida 6 ta belgidan iborat bo\'lishi kerak'),
 });
 
 type RegisterForm = z.infer<typeof registerSchema>;
@@ -87,17 +87,17 @@ const RegisterForm = () => {
         )}
       </div>
       <div>
-        <label htmlFor="password" className="block text-gray-700 font-medium mb-1">
+        <label htmlFor="passwrod" className="block text-gray-700 font-medium mb-1">
           Parol <span className="text-red-500">*</span>
         </label>
         <Input
-          id="password"
+          id="passwrod"
           type="password"
-          {...register('password')}
-          className={`h-12 ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+          {...register('passwrod')}
+          className={`h-12 ${errors.passwrod ? 'border-red-500' : 'border-gray-300'}`}
         />
-        {errors.password && (
-          <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
+        {errors.passwrod && (
+          <p className="text-sm text-red-500 mt-1">{errors.passwrod.message}</p>
         )}
       </div>
       <Button
